@@ -1,12 +1,13 @@
 .dashboard-body {
-  background: #f5f8fc;
+  background: #f2f8f5;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .login-screen {
   align-items: center;
   background:
-    linear-gradient(120deg, rgba(11, 47, 91, 0.95), rgba(20, 93, 160, 0.88)),
+    linear-gradient(120deg, rgba(6, 59, 47, 0.95), rgba(15, 107, 79, 0.88)),
     url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80") center/cover;
   display: flex;
   inset: 0;
@@ -69,7 +70,7 @@
 }
 
 .login-recovery {
-  background: #f8fbff;
+  background: #f4fbf7;
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--navy);
@@ -181,7 +182,7 @@
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(11, 47, 91, 0.07);
+  box-shadow: 0 10px 25px rgba(6, 59, 47, 0.08);
 }
 
 .dashboard-stats article {
@@ -229,7 +230,7 @@
 }
 
 .editable-item {
-  background: #f8fbff;
+  background: #f4fbf7;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1rem;
@@ -263,9 +264,26 @@
 }
 
 @media (max-width: 991.98px) {
+  .login-screen {
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
   .dashboard-sidebar {
     position: static;
     width: auto;
+  }
+
+  .dashboard-brand {
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-sidebar nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dashboard-sidebar nav a {
+    justify-content: center;
   }
 
   .dashboard-shell {
@@ -282,14 +300,57 @@
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+
+  .dashboard-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 575.98px) {
+  .login-card {
+    padding: 1.25rem;
+  }
+
   .dashboard-main,
   .dashboard-topbar,
   .dashboard-footer,
   .dashboard-sidebar {
     padding: 1rem;
+  }
+
+  .dashboard-sidebar nav {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar nav a {
+    justify-content: flex-start;
+  }
+
+  .dashboard-topbar h1 {
+    font-size: 1.35rem;
+  }
+
+  .topbar-actions,
+  .topbar-actions .btn {
+    width: 100%;
+  }
+
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 1rem;
+  }
+
+  .editable-item-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .editable-item-header .btn {
+    width: 100%;
   }
 
   .field-grid {
