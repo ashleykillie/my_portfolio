@@ -27,6 +27,40 @@ body {
   overflow-x: hidden;
 }
 
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatProfile {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px var(--gold), 0 0 0 0 rgba(214, 165, 50, 0.35);
+  }
+
+  50% {
+    box-shadow: 0 0 0 2px var(--gold), 0 0 0 10px rgba(214, 165, 50, 0);
+  }
+}
+
 a {
   color: var(--blue);
 }
@@ -91,9 +125,34 @@ button:focus-visible {
   background:
     linear-gradient(120deg, rgba(6, 59, 47, 0.95), rgba(15, 107, 79, 0.88)),
     url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80") center/cover;
+  background-attachment: fixed;
   color: var(--white);
   min-height: 100vh;
   padding-top: 150px;
+}
+
+.hero .eyebrow,
+.hero h1,
+.hero .lead,
+.hero-summary,
+.hero-actions {
+  animation: fadeSlideUp 700ms ease both;
+}
+
+.hero h1 {
+  animation-delay: 100ms;
+}
+
+.hero .lead {
+  animation-delay: 200ms;
+}
+
+.hero-summary {
+  animation-delay: 300ms;
+}
+
+.hero-actions {
+  animation-delay: 400ms;
 }
 
 .eyebrow {
@@ -149,6 +208,7 @@ button:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 8px;
   box-shadow: var(--shadow);
+  animation: floatProfile 5s ease-in-out infinite;
   padding: 2rem;
 }
 
@@ -244,14 +304,21 @@ button:focus-visible {
   box-shadow: 0 12px 28px rgba(6, 59, 47, 0.09);
   height: 100%;
   padding: 1.5rem;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
 .skill-card:hover,
 .project-card:hover,
 .contact-card:hover {
+  border-color: rgba(214, 165, 50, 0.5);
   box-shadow: var(--shadow);
   transform: translateY(-4px);
+}
+
+.skill-card:hover i,
+.contact-card:hover i,
+.project-card:hover .project-icon {
+  transform: scale(1.08);
 }
 
 .skill-card i,
@@ -259,6 +326,7 @@ button:focus-visible {
   color: var(--gold);
   font-size: 2rem;
   margin-bottom: 1rem;
+  transition: transform 180ms ease;
 }
 
 .skill-card h3,
@@ -313,6 +381,10 @@ button:focus-visible {
   z-index: 1;
 }
 
+.timeline-item.is-visible .timeline-dot {
+  animation: pulseDot 1.7s ease-in-out infinite;
+}
+
 .timeline-content {
   background: var(--white);
   border: 1px solid var(--border);
@@ -336,6 +408,7 @@ button:focus-visible {
   height: 64px;
   justify-content: center;
   margin-bottom: 1.2rem;
+  transition: transform 180ms ease;
   width: 64px;
 }
 
@@ -385,6 +458,25 @@ button:focus-visible {
   display: flex;
   gap: 0.9rem;
   padding: 1rem;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.strength-list li:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateX(4px);
+}
+
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 650ms ease, transform 650ms ease;
+  transition-delay: var(--motion-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .strength-list i {
@@ -476,6 +568,7 @@ button:focus-visible {
 
 @media (max-width: 1199.98px) {
   .hero {
+    background-attachment: scroll;
     min-height: auto;
   }
 
@@ -646,5 +739,25 @@ button:focus-visible {
   .avatar-placeholder {
     height: 128px;
     width: 128px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero {
+    background-attachment: scroll;
+  }
+
+  .motion-reveal {
+    opacity: 1;
+    transform: none;
   }
 }

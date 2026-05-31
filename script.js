@@ -71,6 +71,16 @@ const year = document.querySelector("#year");
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll("main section[id]");
 const navbarCollapse = document.querySelector(".navbar-collapse");
+const revealSelectors = [
+  ".section-heading",
+  ".skill-card",
+  ".timeline-item",
+  ".project-card",
+  ".education-table-wrap",
+  ".strength-list li",
+  ".contact-card",
+  ".message-form",
+];
 
 function loadPortfolioData() {
   const savedData = localStorage.getItem(STORAGE_KEY);
@@ -244,6 +254,47 @@ if (year) {
 }
 
 renderPortfolio();
+
+function initMotionReveals() {
+  const motionItems = document.querySelectorAll(revealSelectors.join(","));
+
+  if (!motionItems.length) {
+    return;
+  }
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  motionItems.forEach((item, index) => {
+    item.classList.add("motion-reveal");
+    item.style.setProperty("--motion-delay", `${Math.min(index % 4, 3) * 80}ms`);
+  });
+
+  if (prefersReducedMotion) {
+    motionItems.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver(
+    (entries, observerInstance) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observerInstance.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.12,
+    }
+  );
+
+  motionItems.forEach((item) => revealObserver.observe(item));
+}
+
+initMotionReveals();
 
 const messageForm = document.querySelector("#messageForm");
 if (messageForm) {
