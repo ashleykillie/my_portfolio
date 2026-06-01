@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Weather Dashboard - Real-time weather data from Open-Meteo API">
+    <title>Weather Dashboard | Ashley Killie</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="styles.css?v=20260527" rel="stylesheet">
+    <link href="weather-dashboard.css" rel="stylesheet">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header>
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Primary navigation">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="index.html" aria-label="Ashley Killie home">
+            <span class="brand-mark">AK</span>
+            Ashley Killie
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link active" href="weather-dashboard.html">Weather</a></li>
+              <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main" class="weather-main">
+      <section class="weather-hero section-padding">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Real-time Data</p>
+            <h1>Weather Dashboard</h1>
+            <p class="lead">View current weather conditions and forecasts powered by Open-Meteo API</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="weather-content section-padding bg-light-blue">
+        <div class="container">
+          <!-- Location Search -->
+          <div class="row mb-5">
+            <div class="col-lg-8 mx-auto">
+              <div class="search-card p-4 bg-white rounded-3 shadow-sm">
+                <label class="form-label fw-bold" for="locationInput">Search Location</label>
+                <div class="input-group input-group-lg">
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="locationInput" 
+                    placeholder="Enter city name (e.g., London, New York, Tokyo)" 
+                    aria-label="Search location"
+                  >
+                  <button class="btn btn-gold" type="button" id="searchBtn" aria-label="Search weather">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                  </button>
+                </div>
+                <small class="form-text text-muted mt-2">
+                  Or use your current location: <button type="button" class="btn btn-link btn-sm p-0" id="geolocationBtn">
+                    <i class="fa-solid fa-location-crosshairs"></i> Use Current Location
+                  </button>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div id="loadingSpinner" class="text-center d-none">
+            <div class="spinner-border text-gold" role="status" aria-label="Loading weather data">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2 text-muted">Fetching weather data...</p>
+          </div>
+
+          <!-- Error State -->
+          <div id="errorAlert" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <strong>Error:</strong> <span id="errorMessage"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <!-- Current Weather Card -->
+          <div id="currentWeatherContainer" class="d-none">
+            <div class="row mb-4">
+              <div class="col-lg-8 mx-auto">
+                <div class="weather-card current-weather p-5 bg-white rounded-3 shadow-sm">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <h2 id="locationName" class="mb-1">—</h2>
+                      <p id="locationCoords" class="text-muted small mb-3">—</p>
+                      <div class="weather-temp-display mb-3">
+                        <span id="currentTemp" class="weather-temperature">—</span>
+                        <span id="weatherIcon" class="weather-icon-large">
+                          <i class="fa-solid fa-cloud"></i>
+                        </span>
+                      </div>
+                      <p id="weatherDescription" class="weather-description mb-0">—</p>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="weather-details">
+                        <div class="detail-item">
+                          <i class="fa-solid fa-droplet text-primary"></i>
+                          <div>
+                            <span class="detail-label">Humidity</span>
+                            <span id="humidity" class="detail-value">—</span>
+                          </div>
+                        </div>
+                        <div class="detail-item">
+                          <i class="fa-solid fa-wind text-info"></i>
+                          <div>
+                            <span class="detail-label">Wind Speed</span>
+                            <span id="windSpeed" class="detail-value">—</span>
+                          </div>
+                        </div>
+                        <div class="detail-item">
+                          <i class="fa-solid fa-gauge text-warning"></i>
+                          <div>
+                            <span class="detail-label">Pressure</span>
+                            <span id="pressure" class="detail-value">—</span>
+                          </div>
+                        </div>
+                        <div class="detail-item">
+                          <i class="fa-solid fa-eye text-secondary"></i>
+                          <div>
+                            <span class="detail-label">Visibility</span>
+                            <span id="visibility" class="detail-value">—</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hourly Forecast -->
+          <div id="hourlyForecastContainer" class="d-none">
+            <div class="row mb-4">
+              <div class="col-12">
+                <h3 class="mb-3">
+                  <i class="fa-solid fa-clock"></i> Hourly Forecast (Next 24 Hours)
+                </h3>
+                <div class="hourly-forecast-scroll">
+                  <div id="hourlyForecast" class="hourly-forecast">
+                    <!-- Hourly cards will be inserted here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Daily Forecast -->
+          <div id="dailyForecastContainer" class="d-none">
+            <div class="row">
+              <div class="col-12">
+                <h3 class="mb-3">
+                  <i class="fa-solid fa-calendar-days"></i> 7-Day Forecast
+                </h3>
+                <div class="row g-3" id="dailyForecast">
+                  <!-- Daily forecast cards will be inserted here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Section -->
+          <div id="infoSection" class="d-none mt-5 pt-5 border-top">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="info-box p-4 bg-white rounded-3 shadow-sm mb-3">
+                  <h5 class="mb-3">
+                    <i class="fa-solid fa-info-circle text-gold"></i> About This Dashboard
+                  </h5>
+                  <p class="small text-muted mb-0">
+                    This weather dashboard uses the free <strong>Open-Meteo API</strong>, which provides accurate weather data without requiring an API key. Data is updated in real-time with a 10-minute refresh interval.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box p-4 bg-white rounded-3 shadow-sm mb-3">
+                  <h5 class="mb-3">
+                    <i class="fa-solid fa-database text-gold"></i> Data Source
+                  </h5>
+                  <p class="small text-muted mb-0">
+                    Powered by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> - A free weather API for open-source projects and non-commercial use.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Welcome Section -->
+      <section id="welcomeSection" class="section-padding">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+              <i class="fa-solid fa-cloud-sun fa-5x text-gold mb-4"></i>
+              <h2>Get Started</h2>
+              <p class="lead text-muted mb-4">
+                Search for a location or use your current location to view detailed weather information including hourly and 7-day forecasts.
+              </p>
+              <div class="alert alert-info" role="alert">
+                <strong>Note:</strong> This dashboard uses geolocation to determine your current location. You may be prompted to grant permission.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <p>&copy; <span id="year"></span> Ashley Killie. All rights reserved.</p>
+          <ul class="footer-links" aria-label="Footer quick links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="weather-dashboard.html">Weather</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="weather-dashboard.js"></script>
+  </body>
+</html>

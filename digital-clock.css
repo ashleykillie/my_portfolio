@@ -1,0 +1,345 @@
+/* Digital Clock Styles */
+
+.clock-main {
+  padding-top: 60px;
+}
+
+.clock-hero {
+  background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+  color: white;
+  text-align: center;
+  padding: 80px 0 !important;
+}
+
+.clock-hero .section-heading h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.clock-hero .lead {
+  font-size: 1.25rem;
+  opacity: 0.95;
+}
+
+/* Primary Clock Card */
+.primary-clock-card {
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.primary-clock-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  border-color: #d4af37;
+}
+
+.primary-clock-card h2 {
+  color: #1a3a52;
+}
+
+/* Primary Clock Display */
+.primary-clock {
+  text-align: center;
+}
+
+.clock-display {
+  background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 20px 0;
+  box-shadow: 0 8px 24px rgba(26, 58, 82, 0.2);
+}
+
+.clock-time {
+  font-family: 'Courier New', monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #d4af37;
+  display: block;
+  letter-spacing: 4px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.clock-date {
+  font-size: 1.25rem;
+  color: #666;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Clock Details */
+.clock-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.detail {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #d4af37;
+}
+
+.detail .label {
+  display: block;
+  font-size: 0.85rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.detail .value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a3a52;
+  font-family: 'Courier New', monospace;
+}
+
+/* Timezone Selector Card */
+.timezone-selector-card {
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.timezone-selector-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  border-color: #d4af37;
+}
+
+.timezone-selector-card .form-select {
+  border-color: #ddd;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.timezone-selector-card .form-select:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+}
+
+.btn-gold {
+  background-color: #d4af37;
+  border-color: #d4af37;
+  color: #1a3a52;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background-color: #c9a227;
+  border-color: #c9a227;
+  color: #1a3a52;
+}
+
+.btn-outline-gold {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+.btn-outline-gold:hover {
+  background-color: #d4af37;
+  border-color: #d4af37;
+  color: #1a3a52;
+}
+
+/* Timezone Cards Grid */
+#activeTimezonesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.timezone-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid #d4af37;
+  position: relative;
+}
+
+.timezone-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.timezone-card .remove-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #999;
+}
+
+.timezone-card .remove-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.timezone-name {
+  font-size: 1rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.timezone-time {
+  font-family: 'Courier New', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #d4af37;
+  margin: 1rem 0;
+  line-height: 1;
+}
+
+.timezone-date {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.timezone-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #999;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.timezone-info span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Quick Add Buttons */
+.quick-add-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.quick-add-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border-width: 2px;
+}
+
+.quick-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Info Boxes */
+.info-box {
+  border-left: 4px solid #d4af37;
+  transition: all 0.3s ease;
+}
+
+.info-box:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+  transform: translateX(4px);
+}
+
+.info-box h5 {
+  color: #1a3a52;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .clock-hero .section-heading h1 {
+    font-size: 2rem;
+  }
+
+  .clock-time {
+    font-size: 2.5rem;
+  }
+
+  .clock-details {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .timezone-time {
+    font-size: 2rem;
+  }
+
+  .quick-add-buttons {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .clock-hero {
+    padding: 40px 0 !important;
+  }
+
+  .clock-hero .section-heading h1 {
+    font-size: 1.75rem;
+  }
+
+  .primary-clock-card {
+    padding: 1.5rem !important;
+  }
+
+  .clock-display {
+    padding: 2rem;
+  }
+
+  .clock-time {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  #activeTimezonesContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .timezone-time {
+    font-size: 1.75rem;
+  }
+
+  .quick-add-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-add-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timezone-card {
+  animation: fadeIn 0.5s ease-in-out;
+}
